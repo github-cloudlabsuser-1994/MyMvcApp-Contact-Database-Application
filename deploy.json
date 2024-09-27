@@ -1,0 +1,111 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+      {
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('appServicePlanName')]",
+        "location": "[parameters('location')]",
+        "sku": {
+          "name": "F1",
+          "tier": "Free"
+        },
+        "properties": {
+          "reserved": false
+        }
+      },
+      {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('webAppName')]",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        ],
+        "properties": {
+          "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]"
+        }
+      },
+      {
+        "type": "Microsoft.Sql/servers",
+        "apiVersion": "2021-02-01",
+        "name": "[parameters('sqlServerName')]",
+        "location": "[parameters('location')]",
+        "properties": {
+          "administratorLogin": "[parameters('sqlAdminUsername')]",
+          "administratorLoginPassword": "[parameters('sqlAdminPassword')]"
+        },
+        "resources": [
+          {
+            "type": "databases",
+            "apiVersion": "2021-02-01",
+            "name": "[parameters('sqlDatabaseName')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[resourceId('Microsoft.Sql/servers', parameters('sqlServerName'))]"
+            ],
+            "properties": {
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "maxSizeBytes": "2147483648",
+              "sampleName": "AdventureWorksLT"
+            },
+            "sku": {
+              "name": "S0",
+              "tier": "Standard",
+              "capacity": 10
+            }
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      },
+      "appServicePlanName": {
+        "type": "string",
+        "defaultValue": "myAppServicePlan",
+        "metadata": {
+          "description": "Name of the App Service Plan."
+        }
+      },
+      "webAppName": {
+        "type": "string",
+        "defaultValue": "myMvcApp",
+        "metadata": {
+          "description": "Name of the Web App."
+        }
+      },
+      "sqlServerName": {
+        "type": "string",
+        "defaultValue": "mySqlServer",
+        "metadata": {
+          "description": "Name of the SQL Server."
+        }
+      },
+      "sqlAdminUsername": {
+        "type": "string",
+        "metadata": {
+          "description": "SQL Server admin username."
+        }
+      },
+      "sqlAdminPassword": {
+        "type": "securestring",
+        "metadata": {
+          "description": "SQL Server admin password."
+        }
+      },
+      "sqlDatabaseName": {
+        "type": "string",
+        "defaultValue": "myDatabase",
+        "metadata": {
+          "description": "Name of the SQL Database."
+        }
+      }
+    }
+  }

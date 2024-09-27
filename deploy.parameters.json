@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "value": "East US"
+      },
+      "appServicePlanName": {
+        "value": "myAppServicePlan"
+      },
+      "webAppName": {
+        "value": "myMvcApp"
+      },
+      "sqlServerName": {
+        "value": "mySqlServer"
+      },
+      "sqlAdminUsername": {
+        "value": "odl_user_1467723@azurehol1157.onmicrosoft.com"
+      },
+      "sqlAdminPassword": {
+        "value": "ckjt31DKQ*9x"  
+      },
+      "sqlDatabaseName": {
+        "value": "myDatabase"
+      }
+    }
+  }
