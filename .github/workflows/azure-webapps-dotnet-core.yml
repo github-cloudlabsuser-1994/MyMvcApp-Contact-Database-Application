@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: mymvcapp-crud    # set this to your application's name
+  AZURE_WEBAPP_NAME: mymvcapp-crud-uxfpyfcrcnboo    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: './published'      # set this to the path where artifacts will be downloaded
   DOTNET_VERSION: '8.0.x'            # set this to the .NET Core version to use
 
