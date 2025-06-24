@@ -59,3 +59,5 @@ C:/Users/azureuser/MyMvcApp/obj/Debug/net8.0/ref/MyMvcApp.dll
 /workspaces/MyMvcApp-Contact-Database-Application/obj/Debug/net8.0/MyMvcApp.pdb
 /workspaces/MyMvcApp-Contact-Database-Application/obj/Debug/net8.0/MyMvcApp.genruntimeconfig.cache
 /workspaces/MyMvcApp-Contact-Database-Application/obj/Debug/net8.0/ref/MyMvcApp.dll
+C:\Users\azureuser\MyMvcApp-Contact-Database-Application\bin\Debug\net8.0\MyMvcApp.exe
+C:\Users\azureuser\MyMvcApp-Contact-Database-Application\bin\Debug\net8.0\MyMvcApp.dll

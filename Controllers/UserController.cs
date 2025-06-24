@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyMvcApp.Models;
+using System.Linq;
 
 namespace MyMvcApp.Controllers;
 
@@ -9,9 +10,20 @@ public class UserController : Controller
     public static System.Collections.Generic.List<User> userlist = new System.Collections.Generic.List<User>();
 
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            return View(userlist);
+            ViewBag.CurrentFilter = searchString;
+            var users = userlist.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                users = users.Where(u => 
+                    u.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase) ||
+                    u.Email.Contains(searchString, StringComparison.OrdinalIgnoreCase)
+                );
+            }
+
+            return View(users.ToList());
         }
 
         // GET: User/Details/5
