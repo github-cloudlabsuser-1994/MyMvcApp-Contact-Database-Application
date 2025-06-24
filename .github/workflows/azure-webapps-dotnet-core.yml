@@ -21,16 +21,16 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Build with dotnet
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp      - name: Upload artifact for deployment job
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/MyMvcApp
+
+      - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/MyMvcApp
 
   deploy:
     runs-on: ubuntu-latest
