@@ -39,11 +39,12 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}    
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
-        with:          name: .net-app
+        with:
+          name: .net-app
           path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
       - name: Azure Login
